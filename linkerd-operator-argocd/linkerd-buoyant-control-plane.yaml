@@ -2,6 +2,8 @@ apiVersion: linkerd.buoyant.io/v1alpha1
 kind: ControlPlane
 metadata:
   name: linkerd-control-plane
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   components:
     linkerd:
