@@ -3,8 +3,8 @@ kind: Application
 metadata:
   name: linkerd-buoyant
   namespace: argocd
-  labels:
-    env: example
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: linkerd
   source:
