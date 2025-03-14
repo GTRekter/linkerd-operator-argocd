@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd-buoyant
+  namespace: argo-cd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: https://helm.buoyant.cloud
+    targetRevision: 0.34.0
+    helm:
+      values: |-
+        licenseSecret: buoyant-license
+        dataPlaneOperator:
+          enabled: true
+        controlPlaneOperator:
+          enabled: true
+        buoyantCloudEnabled: false
+        ### EVERYTHING BELOW THIS LINE IS NEEDED ONLY IF USING A LICENSE SECRET NAMED SOMETHING OTHER THAN `buoyant-license`, E.G., `buoyant-custom-license` ###
+        # additionalEnv:
+        #   - name: BUOYANT_LICENSE
+        #     valueFrom:
+        #       secretKeyRef:
+        #         key: license
+        #         name: buoyant-enterprise-license
+        # destinationController:
+        #   additionalEnv:
+        #     - name: BUOYANT_LICENSE
+        #       valueFrom:
+        #         secretKeyRef:
+        #           key: license
+        #           name: buoyant-enterprise-license
+        # heartbeat:
+        #   additionalEnv:
+        #     - name: BUOYANT_LICENSE
+        #       valueFrom:
+        #         secretKeyRef:
+        #           key: license
+        #           name: buoyant-enterprise-license
+        # proxyInjector:
+        #   additionalEnv:
+        #     - name: BUOYANT_LICENSE
+        #       valueFrom:
+        #         secretKeyRef:
+        #           key: license
+        #           name: buoyant-enterprise-license
+        # spValidator:
+        #   additionalEnv:
+        #     - name: BUOYANT_LICENSE
+        #       valueFrom:
+        #         secretKeyRef:
+        #           key: license
+        #           name: buoyant-enterprise-license
+    chart: linkerd-buoyant
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: linkerd-buoyant
