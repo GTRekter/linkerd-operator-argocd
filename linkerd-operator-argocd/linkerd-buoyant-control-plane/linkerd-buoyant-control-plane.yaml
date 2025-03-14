@@ -7,8 +7,8 @@ metadata:
 spec:
   components:
     linkerd:
-      version: buoyant-license
-      licenseSecret: enterprise-2.16.3
+      version: enterprise-2.16.3
+      licenseSecret: buoyant-license
       controlPlaneConfig:
         identityTrustAnchorsPEM: |
           -----BEGIN CERTIFICATE-----
