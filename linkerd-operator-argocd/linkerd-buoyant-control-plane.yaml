@@ -5,8 +5,8 @@ metadata:
 spec:
   components:
     linkerd:
-      version: PLACEHOLDER_VERSION
-      license: PLACEHOLDER_LICENSE
+      version: buoyant-license
+      licenseSecret: enterprise-2.16.3
       controlPlaneConfig:
         identityTrustAnchorsPEM: |
           -----BEGIN CERTIFICATE-----
