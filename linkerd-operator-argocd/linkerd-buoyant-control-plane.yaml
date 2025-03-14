@@ -1,0 +1,30 @@
+apiVersion: linkerd.buoyant.io/v1alpha1
+kind: ControlPlane
+metadata:
+  name: linkerd-control-plane
+spec:
+  components:
+    linkerd:
+      version: PLACEHOLDER_VERSION
+      license: PLACEHOLDER_LICENSE
+      controlPlaneConfig:
+        identityTrustAnchorsPEM: |
+          -----BEGIN CERTIFICATE-----
+          MIIBjDCCATOgAwIBAgIQUm5N8WXHUeE1U9Odk/UneTAKBggqhkjOPQQDAjAlMSMw
+          IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yNTAzMTQwOTE3
+          MzFaFw0zNTAzMTIwOTE3MzFaMCUxIzAhBgNVBAMTGnJvb3QubGlua2VyZC5jbHVz
+          dGVyLmxvY2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEano7NxnM5hlLCOZS
+          CVCCio7uRg9daLieGulOu4Lu0+5rC3xdJq5KrFbLi4bXR/FschnjjyrekuYEYRoY
+          HvGtnqNFMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYD
+          VR0OBBYEFHKivvpvB/SYNWw+TCDS6a+ekK6RMAoGCCqGSM49BAMCA0cAMEQCIFXj
+          cdU7xj646GxZ516lIiW5MrZshrkYGax7WtAA6wQwAiAzmGaD7TihxZluFW+Qb5W9
+          OPljYsRDjeNEaEOw7VOcSw==
+          -----END CERTIFICATE-----
+        controllerLogLevel: debug
+        identity:
+          issuer:
+            scheme: kubernetes.io/tls
+        proxy:
+          defaultInboundPolicy: all-authenticated
+          logLevel:	"warn,linkerd=debug,hickory=error"	
+          
